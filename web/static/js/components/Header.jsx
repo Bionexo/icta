@@ -47,7 +47,7 @@ const Header = ({ userName, userImage, isAdmin }) => (
       </div>
       <div id="navbar" className="navbar-collapse collapse">
         <ul className="nav navbar-nav">
-          <LinkWrapper to="/" value="header.list" />
+          <LinkWrapper to="/ideas" value="header.list" />
           <LinkWrapper to="/quarantine" value="header.quarantine" renderCondition={isAdmin} />
           <LinkWrapper to="/my_ideas" value="header.my_ideas" />
           <LinkWrapper to="/ideas/new" value="header.new" />
