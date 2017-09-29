@@ -165,11 +165,11 @@ export const fetchIdea = ideaId => (
   }
 );
 
-export const addComment = (ideaId, body) => (
+export const addComment = (ideaId, body, isPublic) => (
   (dispatch) => {
     dispatch(addCommentRequest());
 
-    const payload = { idea_id: ideaId, body };
+    const payload = { idea_id: ideaId, body, public: isPublic };
 
     ideaChannel.push('comment:new', payload)
       .receive('ok', () => {
@@ -297,4 +297,3 @@ const simpleQuarantineAction = (action, onSuccess, onError) =>
 export const approveIdea = simpleQuarantineAction('quarantine:approve', approveIdeaSuccess, approveIdeaFailure);
 export const denyIdea = simpleQuarantineAction('quarantine:deny', denyIdeaSuccess, denyIdeaFailure);
 export const deleteIdea = simpleIdeaAction('delete', deleteIdeaSuccess, deleteIdeaFailure);
-

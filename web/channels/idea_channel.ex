@@ -19,8 +19,8 @@ defmodule Icta.IdeaChannel do
 
   def handle_in("get", params, socket) do
     {:reply, {:ok, %{
-      idea: Idea.one_with_votes(params["idea_id"], socket.assigns[:current_user]) ,
-      comments: Comment.all_comments_for_idea(params["idea_id"])
+      idea: Idea.one_with_votes(params["idea_id"], socket.assigns[:current_user]),
+      comments: Comment.all_comments_for_idea(params["idea_id"], socket.assigns[:current_user])
     }}, socket }
   end
 

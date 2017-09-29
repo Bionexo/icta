@@ -15,6 +15,7 @@ export default {
       by: 'Por <strong>%{name}</strong> em %{date}',
       new: 'Comentar',
       title: 'Comentários',
+      public: 'Público?',
     },
     statuses: {
       new: 'Nova',

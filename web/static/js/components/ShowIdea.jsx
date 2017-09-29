@@ -4,8 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { Translate, I18n } from 'react-redux-i18n';
 import { Link } from 'react-router-dom';
 
-import Comment from './Comment';
-import NewComment from './NewComment';
+import CommentsContainer from '../containers/CommentsContainer';
 
 const confirmDelete = (onDeleteIdea) => {
   // TODO: Y U CONFIRM?
@@ -26,7 +25,7 @@ const canDeleteIdea = (idea, currentUser) => (
   idea.author.id === currentUser.id && idea.status === 'under_review'
 );
 
-const ShowIdea = ({ idea, onAddComment, onDeleteIdea, currentUser }) => (
+const ShowIdea = ({ idea, onDeleteIdea, currentUser }) => (
   <div className="show-idea">
     <div className="row">
       <div className="col-xs-4">
@@ -86,23 +85,7 @@ const ShowIdea = ({ idea, onAddComment, onDeleteIdea, currentUser }) => (
         </div>
       </div>
     </div>
-    <div className="row">
-      <div className="col-xs-12">
-        <br />
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <h4><Translate value="idea.comments.title" /></h4>
-          </div>
-          <div className="panel-body">
-            <NewComment onAddComment={onAddComment} />
-          </div>
-          <ul className="list-group">
-            { idea.comments.map(c =>
-              <Comment key={c.id} body={c.body} createdAt={c.created_at} author={c.author} />) }
-          </ul>
-        </div>
-      </div>
-    </div>
+    <CommentsContainer comments={idea.comments} />
   </div>
 );
 
@@ -132,7 +115,6 @@ ShowIdea.propTypes = {
   }).isRequired,
   currentUser: PropTypes.shape({
   }).isRequired,
-  onAddComment: PropTypes.func.isRequired,
   onDeleteIdea: PropTypes.func.isRequired,
 };
 

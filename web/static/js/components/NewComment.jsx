@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-redux-i18n';
 
-const NewComment = ({ onAddComment }) => {
+const NewComment = ({ onAddComment, showPublicFlag }) => {
   let body;
+  let isPublic = { checked: true };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -11,7 +12,7 @@ const NewComment = ({ onAddComment }) => {
       return;
     }
 
-    onAddComment(body.value);
+    onAddComment(body.value, isPublic.checked);
     body.value = '';
   };
 
@@ -22,9 +23,27 @@ const NewComment = ({ onAddComment }) => {
           <textarea ref={(node) => { body = node; }} className="form-control" id="body" />
         </div>
         <div className="form-group text-right">
-          <button type="submit" className="btn btn-primary">
-            <Translate value="idea.comments.new" />
-          </button>
+          <div className="row">
+            <div className="col-xs-6 col-sm-2 pull-right">
+              <button type="submit" className="btn btn-primary">
+                <Translate value="idea.comments.new" />
+              </button>
+            </div>
+            { showPublicFlag ?
+              <div className="col-xs-6 col-sm-8 pull-right">
+                <label htmlFor="is-public">
+                  <input
+                    ref={(node) => { isPublic = node; }}
+                    type="checkbox"
+                    defaultChecked
+                    id="is-public"
+                  />
+                  <Translate value="idea.comments.public" />
+                </label>
+              </div>
+              : ''
+            }
+          </div>
         </div>
       </form>
     </div>
@@ -33,6 +52,7 @@ const NewComment = ({ onAddComment }) => {
 
 NewComment.propTypes = {
   onAddComment: PropTypes.func.isRequired,
+  showPublicFlag: PropTypes.bool.isRequired,
 };
 
 export default NewComment;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ShowIdea from '../components/ShowIdea';
 import ShowQuarantineIdea from '../components/ShowQuarantineIdea';
-import { fetchIdea, addComment, deleteIdea, approveIdea, denyIdea } from '../actions/ideas';
+import { fetchIdea, deleteIdea, approveIdea, denyIdea } from '../actions/ideas';
 
 class ShowIdeaContainer extends Component {
   componentWillMount() {
@@ -12,7 +12,7 @@ class ShowIdeaContainer extends Component {
   }
 
   render() {
-    const { idea, history, onAddComment, onDelete, currentUser, onApprove, onDeny } = this.props;
+    const { idea, history, onDelete, currentUser, onApprove, onDeny } = this.props;
 
     if (idea === null || idea.loading) {
       return null;
@@ -22,14 +22,12 @@ class ShowIdeaContainer extends Component {
       idea.status === 'under_review' ? <ShowQuarantineIdea
         idea={idea}
         currentUser={currentUser}
-        onAddComment={body => onAddComment(idea.id, body)}
         onApprove={() => onApprove(idea.id, history)}
         onDeny={() => onDeny(idea.id, history)}
         onDeleteIdea={() => onDelete(idea.id, history)}
       /> : <ShowIdea
         idea={idea}
         currentUser={currentUser}
-        onAddComment={body => onAddComment(idea.id, body)}
         onDeleteIdea={() => onDelete(idea.id, history)}
       />
     );
@@ -45,7 +43,6 @@ ShowIdeaContainer.propTypes = {
   history: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   getIdea: PropTypes.func.isRequired,
-  onAddComment: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onApprove: PropTypes.func.isRequired,
   onDeny: PropTypes.func.isRequired,
@@ -64,9 +61,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => ({
   getIdea: (ideaId) => {
     dispatch(fetchIdea(ideaId));
-  },
-  onAddComment: (ideaId, body) => {
-    dispatch(addComment(ideaId, body));
   },
   onDelete: (ideaId, history) => {
     dispatch(deleteIdea(ideaId, history));

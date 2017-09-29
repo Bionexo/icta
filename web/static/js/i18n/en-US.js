@@ -15,6 +15,7 @@ export default {
       by: 'By <strong>%{name}</strong> at %{date}',
       new: 'Comment',
       title: 'Comments',
+      public: 'Public?',
     },
     statuses: {
       new: 'New',
