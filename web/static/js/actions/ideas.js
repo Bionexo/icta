@@ -295,5 +295,26 @@ const simpleQuarantineAction = (action, onSuccess, onError) =>
   simpleAction(quarantineChannel, action, onSuccess, onError);
 
 export const approveIdea = simpleQuarantineAction('quarantine:approve', approveIdeaSuccess, approveIdeaFailure);
-export const denyIdea = simpleQuarantineAction('quarantine:deny', denyIdeaSuccess, denyIdeaFailure);
 export const deleteIdea = simpleIdeaAction('delete', deleteIdeaSuccess, deleteIdeaFailure);
+
+export const denyIdea = (ideaId, reason, history) => (
+  (dispatch) => {
+    dispatch(deleteIdeaRequest());
+
+    const payload = { idea_id: ideaId, reason };
+
+    quarantineChannel.push('quarantine:deny', payload)
+      .receive('ok', () => {
+        dispatch(denyIdeaSuccess(ideaId));
+        dispatch(Notifications.success({
+          title: I18n.t('notifications.quarantine_deny_idea_success.title'.replace(':', '_')),
+          message: I18n.t('notifications.quarantine_deny_idea_success.message'.replace(':', '_')),
+        }));
+
+        history.push('/');
+      })
+      .receive('error', (error) => {
+        dispatch(denyIdeaFailure(error));
+      });
+  }
+);

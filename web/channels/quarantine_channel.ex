@@ -32,7 +32,7 @@ defmodule Icta.QuarantineChannel do
   def handle_in("quarantine:deny", params, socket) do
     authorize_admin!(socket)
 
-    case Idea.deny(params["idea_id"], socket.assigns[:current_user]) do
+    case Idea.deny(params["idea_id"], params["reason"], socket.assigns[:current_user]) do
       {:ok, _}        ->
         Icta.Endpoint.broadcast_from! self(), "idea", "quarantine:denied", Idea.one_with_votes(params["idea_id"], socket.assigns[:current_user])
         {:reply, {:ok, %{}}, socket }

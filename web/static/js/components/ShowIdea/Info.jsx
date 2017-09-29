@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-redux-i18n';
 
+import QuarantineActions from './QuarantineActions';
+
 const Info = ({ idea, showQuarantineActions, onApprove, onDeny }) => (
   <div className="col-md-2">
     { idea.owner.id ? <p> <strong><Translate value="idea.owner" />:</strong><br />
@@ -25,26 +27,11 @@ const Info = ({ idea, showQuarantineActions, onApprove, onDeny }) => (
         <Translate value={`idea.categories.${idea.category}`} dangerousHTML />
       </span>
     </p>
-    { showQuarantineActions ?
-      <p> <strong><Translate value="idea.quarantine.approved" />?</strong> </p> : ''
-    }
-    { showQuarantineActions ?
-      <div className="row">
-        <div className="col-lg-4 col-md-5 col-xs-2">
-          <button className="btn btn-sm btn-success" onClick={onApprove}>
-            <i className="fa fa-check-circle" /> &nbsp;
-            <Translate value="idea.quarantine.approve" />
-          </button>
-        </div>
-        <div className="col-md-5 col-xs-2">
-          <button className="btn btn-sm btn-danger" onClick={onDeny}>
-            <i className="fa fa-times-circle" /> &nbsp;
-            <Translate value="idea.quarantine.deny" />
-          </button>
-        </div>
-      </div>
-      : ''
-    }
+    { idea.status === 'denied' ? <p>
+      <strong><Translate value="idea.deny_reason" />: &nbsp;</strong><br />
+      { idea.deny_reason }
+    </p> : '' }
+    { showQuarantineActions ? <QuarantineActions onApprove={onApprove} onDeny={onDeny} /> : '' }
   </div>
 );
 
@@ -54,6 +41,7 @@ Info.propTypes = {
     status: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    deny_reason: PropTypes.string,
     owner: PropTypes.shape({
       id: PropTypes.number,
       image_url: PropTypes.string,

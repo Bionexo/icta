@@ -11,6 +11,12 @@ export default {
     empty: 'Nenhuma ideia encontrada.',
   },
   idea: {
+    deny_reason: 'Justificativa',
+    deny: {
+      reason: 'Justificativa',
+      cancel: 'Voltar',
+      confirm: 'Reprovar',
+    },
     comments: {
       by: 'Por <strong>%{name}</strong> em %{date}',
       new: 'Comentar',

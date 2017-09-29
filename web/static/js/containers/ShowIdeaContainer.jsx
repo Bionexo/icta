@@ -46,7 +46,7 @@ class ShowIdeaContainer extends Component {
               idea={idea}
               showQuarantineActions={showQuarantineActions}
               onApprove={() => onApprove(idea.id, history)}
-              onDeny={() => onDeny(idea.id, history)}
+              onDeny={reason => onDeny(idea.id, reason, history)}
             />
             <Body
               title={idea.title}
@@ -94,8 +94,8 @@ const mapDispatchToProps = dispatch => ({
   onApprove: (ideaId, history) => {
     dispatch(approveIdea(ideaId, history));
   },
-  onDeny: (ideaId, history) => {
-    dispatch(denyIdea(ideaId, history));
+  onDeny: (ideaId, reason, history) => {
+    dispatch(denyIdea(ideaId, reason, history));
   },
 });
 

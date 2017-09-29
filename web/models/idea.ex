@@ -6,6 +6,7 @@ defmodule Icta.Idea do
     field :body, :string
     field :status, :string
     field :category, :string
+    field :deny_reason, :string
     belongs_to :user, Icta.User
     belongs_to :owner, Icta.User
     has_many :comments, Icta.Comment, on_delete: :delete_all
@@ -19,7 +20,7 @@ defmodule Icta.Idea do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body, :user_id, :owner_id, :status, :category])
+    |> cast(params, [:title, :body, :user_id, :owner_id, :status, :category, :deny_reason])
     |> validate_required([:title, :user_id])
     |> validate_inclusion(:status, ["under_review", "denied", "new", "planned", "in_progress", "done"])
     |> validate_inclusion(:category, ["business", "company"])
@@ -36,17 +37,16 @@ defmodule Icta.Idea do
   end
 
   def approve(idea_id, user) do
-    curate("new", idea_id, user)
-  end
-
-  def deny(idea_id, user) do
-    curate("denied", idea_id, user)
-  end
-
-  defp curate(status, idea_id, user) do
     idea = Icta.Repo.get!(Icta.Idea, idea_id)
 
-    changeset = Icta.Idea.changeset(idea, %{ status: status })
+    changeset = Icta.Idea.changeset(idea, %{ status: "new" })
+    Icta.Repo.update(changeset)
+  end
+
+  def deny(idea_id, reason, user) do
+    idea = Icta.Repo.get!(Icta.Idea, idea_id)
+
+    changeset = Icta.Idea.changeset(idea, %{ status: "denied", deny_reason: reason })
     Icta.Repo.update(changeset)
   end
 
@@ -58,7 +58,7 @@ defmodule Icta.Idea do
       left_join: comments in Icta.Comment, on: i.id == comments.idea_id,
       left_join: owner in Icta.User, on: i.owner_id == owner.id,
       inner_join: user in Icta.User, on: i.user_id == user.id,
-      select: %{id: i.id, title: i.title, body: i.body, category: i.category,
+      select: %{id: i.id, title: i.title, body: i.body, category: i.category, deny_reason: i.deny_reason,
         author: %{ name: user.name, id: user.id, image_url: user.image_url },
         owner: %{ name: owner.name, id: owner.id, image_url: owner.image_url },
         up: count(v_up.id, :distinct), down: count(v_down.id, :distinct), my_vote: my_vote.vote,

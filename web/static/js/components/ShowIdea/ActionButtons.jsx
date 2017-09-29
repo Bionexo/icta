@@ -10,7 +10,6 @@ const confirmDelete = (onDeleteIdea) => {
   }
 };
 
-
 const ActionButtons = ({ ideaId, canEditIdea, canDeleteIdea, onDeleteIdea }) => (
   <div className="row">
     <div className="col-xs-4">
