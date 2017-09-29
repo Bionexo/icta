@@ -13,7 +13,7 @@ const CommentsContainer = ({ comments, idea, onAddComment, showPublicFlag }) => 
       <br />
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h4><Translate value="comments.title" /></h4>
+          <h4><Translate value="idea.comments.title" /></h4>
         </div>
         <div className="panel-body">
           <NewComment

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ShowIdea from '../components/ShowIdea';
-import ShowQuarantineIdea from '../components/ShowQuarantineIdea';
 import { fetchIdea, deleteIdea, approveIdea, denyIdea } from '../actions/ideas';
+
+import ActionButtons from '../components/ShowIdea/ActionButtons';
+import Body from '../components/ShowIdea/Body';
+import Info from '../components/ShowIdea/Info';
+import CommentsContainer from '../containers/CommentsContainer';
 
 class ShowIdeaContainer extends Component {
   componentWillMount() {
@@ -18,18 +21,41 @@ class ShowIdeaContainer extends Component {
       return null;
     }
 
+    const canEditIdea = currentUser.kind === 'admin' || (
+      idea.status === 'under_review' && (
+        idea.author.id === currentUser.id || idea.owner.id === currentUser.id
+      )
+    );
+
+    const canDeleteIdea =
+      idea.author.id === currentUser.id && idea.status === 'under_review';
+
+    const showQuarantineActions = idea.status === 'under_review' && currentUser.kind === 'admin';
+
     return (
-      idea.status === 'under_review' ? <ShowQuarantineIdea
-        idea={idea}
-        currentUser={currentUser}
-        onApprove={() => onApprove(idea.id, history)}
-        onDeny={() => onDeny(idea.id, history)}
-        onDeleteIdea={() => onDelete(idea.id, history)}
-      /> : <ShowIdea
-        idea={idea}
-        currentUser={currentUser}
-        onDeleteIdea={() => onDelete(idea.id, history)}
-      />
+      <div className="show-idea">
+        <ActionButtons
+          ideaId={idea.id}
+          canEditIdea={canEditIdea}
+          canDeleteIdea={canDeleteIdea}
+          onDeleteIdea={() => onDelete(idea.id, history)}
+        />
+        <div className={`well well-sm status-${idea.status.replace('_', '-')}`}>
+          <div className="row">
+            <Info
+              idea={idea}
+              showQuarantineActions={showQuarantineActions}
+              onApprove={() => onApprove(idea.id, history)}
+              onDeny={() => onDeny(idea.id, history)}
+            />
+            <Body
+              title={idea.title}
+              body={idea.body}
+            />
+          </div>
+        </div>
+        <CommentsContainer comments={idea.comments} />
+      </div>
     );
   }
 }
