@@ -23,7 +23,7 @@ defmodule Icta.Idea do
     |> cast(params, [:title, :body, :user_id, :owner_id, :status, :category, :deny_reason])
     |> validate_required([:title, :user_id])
     |> validate_inclusion(:status, ["under_review", "denied", "new", "planned", "in_progress", "done"])
-    |> validate_inclusion(:category, ["business", "company"])
+    |> validate_inclusion(:category, ["business", "company", "office"])
   end
 
   def all_with_votes(user) do

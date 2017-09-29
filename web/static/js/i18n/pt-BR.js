@@ -35,6 +35,7 @@ export default {
     categories: {
       business: 'Produto / Serviço',
       company: 'Melhoria interna',
+      office: 'Novo escritório',
     },
     title: 'Título',
     body: 'Conteúdo',
