@@ -9,6 +9,7 @@ import ideaFilter from './ideaFilter';
 import quarantineIdeaFilter from './quarantineIdeaFilter';
 import userFilter from './userFilter';
 import users from './users';
+import configurations from './configurations';
 
 const rootReducer = combineReducers({
   ideas,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   userFilter,
   notifications,
   users,
+  configurations,
   i18n: i18nReducer,
 });
 

@@ -9,3 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+#
+Icta.Configuration.find_or_create("home", nil);
+Icta.Configuration.find_or_create("terms", nil);

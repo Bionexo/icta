@@ -8,6 +8,7 @@ import Notifications from 'react-notification-system-redux';
 
 import { showIdeas } from '../actions/ideas';
 import { getUser as fetchUser } from '../actions/users';
+import { getConfigs as fetchConfigs } from '../actions/configuration';
 
 import ApprovedIdeasListContainer from './ApprovedIdeasListContainer';
 import QuarantineIdeasListContainer from './QuarantineIdeasListContainer';
@@ -16,16 +17,18 @@ import NewIdeaContainer from './NewIdeaContainer';
 import ShowIdeaContainer from './ShowIdeaContainer';
 import EditIdeaContainer from './EditIdeaContainer';
 import UserListContainer from './UserListContainer';
-import Header from '../components/Header';
+import HeaderContainer from '../containers/HeaderContainer';
+import ConfigurationListContainer from '../containers/ConfigurationListContainer';
 import Home from '../components/Home';
 
 const history = createBrowserHistory();
 
 class App extends Component {
   componentWillMount() {
-    const { getIdeas, getUser } = this.props;
+    const { getIdeas, getUser, getConfigs } = this.props;
     getIdeas();
     getUser();
+    getConfigs();
   }
 
   render() {
@@ -36,7 +39,7 @@ class App extends Component {
         <Router history={history}>
           <div>
             <Notifications notifications={notifications} />
-            <Header />
+            <HeaderContainer />
             <div className="container-fluid">
               <main role="main">
                 <Route exact path="/" component={Home} />
@@ -47,6 +50,8 @@ class App extends Component {
                 <Route path="/ideas/show/:id" component={ShowIdeaContainer} />
                 <Route path="/ideas/edit/:id" component={EditIdeaContainer} />
                 <Route path="/users" component={UserListContainer} />
+                <Route path="/configurations" component={ConfigurationListContainer} />
+                <Route path="/configurations/edit/:id" component={ConfigurationListContainer} />
               </main>
             </div>
           </div>
@@ -59,6 +64,7 @@ class App extends Component {
 App.propTypes = {
   getIdeas: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
+  getConfigs: PropTypes.func.isRequired,
   notifications: PropTypes.array.isRequired,
 };
 
@@ -72,6 +78,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getUser: () => {
     dispatch(fetchUser());
+  },
+  getConfigs: () => {
+    dispatch(fetchConfigs());
   },
 });
 

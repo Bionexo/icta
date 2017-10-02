@@ -10,6 +10,7 @@ defmodule Icta.IctaSocket do
   channel "idea", Icta.IdeaChannel
   channel "quarantine", Icta.QuarantineChannel
   channel "user", Icta.UserChannel
+  channel "config", Icta.ConfigurationChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

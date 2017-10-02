@@ -11,6 +11,11 @@ export default {
     empty: 'No idea found.',
   },
   idea: {
+    home: {
+      header: 'Welcome to icta!',
+      body: '<p> Icta was created to be our idea repository, a place where everybody can create, comment and vote on any idea.</p>',
+      link: 'Ok, show me the ideas!',
+    },
     deny_reason: 'Deny reason',
     deny: {
       reason: 'Reason',

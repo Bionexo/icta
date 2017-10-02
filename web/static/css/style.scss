@@ -13,6 +13,17 @@ $navbar-height: 90px;
   border-color: #4378bd;
   border-radius: 0;
 
+  .profile-loading {
+    float: right;
+    background-image: url("../images/spinner.gif");
+    height: 88px;
+    width: 116px;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+    list-style: none;
+  }
+
   .navbar-brand {
     background-image: url("../images/ictawhitelower.png");
     background-size: 65%;
@@ -189,4 +200,8 @@ $navbar-height: 90px;
 
 .private-comment-icon {
   margin: 5px;
+}
+
+.configuration.card {
+  width: 20rem;
 }
