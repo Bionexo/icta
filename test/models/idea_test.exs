@@ -71,11 +71,13 @@ defmodule Icta.IdeaTest do
   test "#deny should mark an quarantined idea as denied" do
     user = insert(:user)
     idea = insert(:idea, %{user: user})
+    reason = "Test"
 
-    {:ok, _} = Idea.deny(idea.id, user)
+    {:ok, _} = Idea.deny(idea.id, reason, user)
 
     idea = Repo.get!(Idea, idea.id)
 
     assert idea.status == "denied"
+    assert idea.deny_reason == "Test"
   end
 end

@@ -23,4 +23,13 @@ defmodule Icta.Factory do
       vote: true,
     }
   end
+
+  def configuration_factory do
+    %Icta.Configuration{
+      user: build(:user),
+      kind: "markdown",
+      value: "test_value",
+      key: "test_key",
+    }
+  end
 end
