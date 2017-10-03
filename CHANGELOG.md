@@ -1,5 +1,9 @@
 # Next Version
 
+# 3.1.1
+
+- Keep only the new office category
+
 # 3.1.0
 
 - Allow admins to change idea info anytime

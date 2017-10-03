@@ -84,8 +84,6 @@ class NewIdea extends React.Component {
           <div className="form-group">
             <label htmlFor="category"><Translate value="idea.category" /></label>
             <select onChange={this.handleFieldChange('category')} className="form-control">
-              <option value="business">{I18n.t('idea.categories.business')}</option>
-              <option value="company">{I18n.t('idea.categories.company')}</option>
               <option value="office">{I18n.t('idea.categories.office')}</option>
             </select>
           </div>
