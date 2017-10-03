@@ -1,10 +1,18 @@
 # Next Version
 
+# 3.1.0
+
 - Allow admins to change idea info anytime
 - Use a better color for under revision ideas
 - Fix bug causing users to always be set to kind 'user' on login
 - Allow user to filter quarantined ideas, and show under_revision ideas
 - Show a message when no ideas are found given the filter criteria
+- Block user from editing idea after approval
+- Only admins can change the idea status
+- Comment kind
+- Deny reason
+- Home page
+- Configuration page
 
 # 3.0.3
 
