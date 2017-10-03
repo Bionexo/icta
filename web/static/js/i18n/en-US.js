@@ -6,6 +6,7 @@ export default {
     users: 'Users',
     welcome: 'Welcome %{name}',
     my_ideas: 'My ideas',
+    configurations: 'Configure',
   },
   ideas: {
     empty: 'No idea found.',
@@ -80,6 +81,10 @@ export default {
       title: 'User updated',
       message: 'User kind updated successfully.',
     },
+    config_success: {
+      title: 'Configuration updated',
+      message: 'Configuration updated successfully.',
+    },
   },
   confirm_message: 'Você tem certeza?',
   datetime: 'MM/DD/YYYY, h:mm',
@@ -91,4 +96,11 @@ export default {
     users: 'Users',
     is_admin: 'Is admin ?',
   },
+  configurations: {
+    names: {
+      home: 'Home page text',
+      terms: 'Terms and conditions link',
+    },
+    edit: 'Edit',
+  }
 };

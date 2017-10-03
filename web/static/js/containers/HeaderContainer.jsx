@@ -5,9 +5,13 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import HeaderLoading from '../components/HeaderLoading';
 
-const HeaderContainer = ({isUserLoaded}) => (
+const HeaderContainer = ({ isUserLoaded }) => (
   isUserLoaded ? <Header /> : <HeaderLoading />
 );
+
+HeaderContainer.propTypes = {
+  isUserLoaded: PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = state => ({
   isUserLoaded: state.user.id !== null,

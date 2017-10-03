@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import ConfigurationList from '../components/ConfigurationList';
 
-const ConfigurationListContainer = ({configurations}) => (
+const ConfigurationListContainer = ({ configurations }) => (
   <ConfigurationList configurations={configurations} />
 );
 

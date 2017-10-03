@@ -21,7 +21,7 @@ defmodule Icta.ConfigurationChannel do
 
     case Configuration.update_key(params["key"], params["value"], socket.assigns[:current_user]) do
       {:ok, config} ->
-        broadcast! socket, "updated", %{key: config.key, value: config.value, user_id: config.user_id}
+        broadcast! socket, "updated", %{kind: config.kind, key: config.key, value: config.value, user_id: config.user_id}
         {:reply, :ok, socket}
       {:error, error} ->
         {:reply, {:error, error}, socket}
@@ -32,7 +32,7 @@ defmodule Icta.ConfigurationChannel do
 
   defp authorize_admin!(socket) do
     # Reload the user to see if it has changed in the db
-    user = Repo.get!(User, socket.assigns[:current_user].id)
+    user = Repo.get!(Icta.User, socket.assigns[:current_user].id)
     if user.kind != "admin", do: raise "unauthorized"
   end
 end

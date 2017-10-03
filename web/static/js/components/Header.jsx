@@ -52,7 +52,11 @@ const Header = ({ userName, userImage, isAdmin }) => (
           <LinkWrapper to="/my_ideas" value="header.my_ideas" />
           <LinkWrapper to="/ideas/new" value="header.new" />
           <LinkWrapper to="/users" value="header.users" renderCondition={isAdmin} />
-          <LinkWrapper to="/configurations" value="header.configurations" renderCondition={isAdmin} />
+          <LinkWrapper
+            to="/configurations"
+            value="header.configurations"
+            renderCondition={isAdmin}
+          />
         </ul>
         <ul className="nav navbar-nav navbar-right hidden-xs">
           <li>

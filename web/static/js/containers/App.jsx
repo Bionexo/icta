@@ -19,6 +19,7 @@ import EditIdeaContainer from './EditIdeaContainer';
 import UserListContainer from './UserListContainer';
 import HeaderContainer from '../containers/HeaderContainer';
 import ConfigurationListContainer from '../containers/ConfigurationListContainer';
+import EditConfigurationContainer from '../containers/EditConfigurationContainer';
 import Home from '../components/Home';
 
 const history = createBrowserHistory();
@@ -43,15 +44,15 @@ class App extends Component {
             <div className="container-fluid">
               <main role="main">
                 <Route exact path="/" component={Home} />
-                <Route path="/ideas" component={ApprovedIdeasListContainer} />
                 <Route path="/quarantine" component={QuarantineIdeasListContainer} />
                 <Route path="/my_ideas" component={MyIdeasListContainer} />
+                <Route exact path="/ideas" component={ApprovedIdeasListContainer} />
                 <Route path="/ideas/new" component={NewIdeaContainer} />
                 <Route path="/ideas/show/:id" component={ShowIdeaContainer} />
                 <Route path="/ideas/edit/:id" component={EditIdeaContainer} />
                 <Route path="/users" component={UserListContainer} />
-                <Route path="/configurations" component={ConfigurationListContainer} />
-                <Route path="/configurations/edit/:id" component={ConfigurationListContainer} />
+                <Route exact path="/configurations" component={ConfigurationListContainer} />
+                <Route path="/configurations/edit/:key" component={EditConfigurationContainer} />
               </main>
             </div>
           </div>

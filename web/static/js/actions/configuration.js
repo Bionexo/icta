@@ -14,6 +14,7 @@ export const CONFIG_UPDATE_FAILURE = 'CONFIG_UPDATE_FAILURE';
 
 const allConfigsRequested = () => ({ type: ALL_CONFIGS_REQUESTED });
 const allConfigsReceived = configs => ({ type: ALL_CONFIGS_RECEIVED, configs });
+const allConfigsError = error => ({ type: ALL_CONFIGS_RECEIVED, error });
 const configUpdateReceived = config => ({ type: CONFIG_UPDATE_RECEIVED, config });
 
 const configUpdateRequest = config => ({ type: CONFIG_UPDATE_REQUEST, config });
@@ -32,7 +33,7 @@ export const getConfigs = () => (
         dispatch(allConfigsReceived(response.configs));
       })
       .receive('error', (error) => {
-        dispatch(allConfigsError(response));
+        dispatch(allConfigsError(error));
       });
 
     configChannel.on('updated', (msg) => {
@@ -53,8 +54,8 @@ export const setConfig = (key, value) => (
           message: I18n.t('notifications.config_success.message'),
         }));
       })
-      .receive('error', () => {
-        dispatch(configUpdateFailure(config));
+      .receive('error', (e) => {
+        dispatch(configUpdateFailure(e));
       });
   }
 );

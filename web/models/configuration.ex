@@ -4,6 +4,7 @@ defmodule Icta.Configuration do
   schema "configurations" do
     field :key, :string
     field :value, :string
+    field :kind, :string
     belongs_to :user, Icta.User
 
     timestamps()
@@ -14,23 +15,24 @@ defmodule Icta.Configuration do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:key, :value])
-    |> validate_required([:key])
+    |> cast(params, [:key, :value, :kind])
+    |> validate_required([:key, :kind])
+    |> validate_inclusion(:kind, ["markdown", "string"])
   end
 
-  def find_or_create(key, value) do
+  def find_or_create(key, value, kind) do
     query = from c in Icta.Configuration,
             where: c.key == ^key
 
     if !Icta.Repo.one(query) do
       %Icta.Configuration{}
-      |> Icta.Configuration.changeset(%{key: key, value: value})
+      |> Icta.Configuration.changeset(%{key: key, value: value, kind: kind})
       |> Icta.Repo.insert!
     end
   end
 
   def fetch_all do
-    (from c in Icta.Configuration, select: %{ key: c.key, value: c.value })
+    (from c in Icta.Configuration, select: %{ kind: c.kind, key: c.key, value: c.value })
     |> Icta.Repo.all
   end
 

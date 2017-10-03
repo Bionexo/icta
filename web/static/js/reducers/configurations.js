@@ -8,7 +8,8 @@ const configurations = (state = [], action) => {
   switch (action.type) {
     case ALL_CONFIGS_RECEIVED:
       return action.configs;
-    case CONFIG_UPDATE_SUCCESS:
+    case CONFIG_UPDATE_RECEIVED:
+      console.log(action)
       const updatedIndex = state.map(i => i.key).indexOf(action.config.key);
       return replaceConfig(state, action.config, updatedIndex);
     case CONFIG_UPDATE_FAILURE:
