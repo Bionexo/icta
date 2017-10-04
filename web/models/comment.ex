@@ -24,7 +24,8 @@ defmodule Icta.Comment do
       left_join: user in Icta.User, on: c.user_id == user.id,
       select: %{id: c.id, body: c.body, created_at: c.inserted_at, public: c.public,
         author: %{ name: user.name, image_url: user.image_url }},
-      where: c.idea_id == ^idea_id
+      where: c.idea_id == ^idea_id,
+      order_by: [desc: c.inserted_at]
 
     query = if user.kind == "user" do
         from c in query, where: c.public == true

@@ -32,4 +32,13 @@ defmodule Icta.Factory do
       key: "test_key",
     }
   end
+
+  def comment_factory do
+    %Icta.Comment{
+      idea: build(:idea),
+      user: build(:user),
+      body: "Comment body",
+      public: true,
+    }
+  end
 end

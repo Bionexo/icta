@@ -11,7 +11,7 @@ const Comment = ({ comment }) => (
       </div>
       <div className="media-body">
         <p>{comment.body}</p>
-        <p><Translate value="idea.comments.by" name={comment.author.name} date={I18n.l(comment.createdAt, { dateFormat: 'datetime' })} dangerousHTML /></p>
+        <p><Translate value="idea.comments.by" name={comment.author.name} date={I18n.l(comment.created_at, { dateFormat: 'datetime' })} dangerousHTML /></p>
       </div>
     </div>
   </li>
