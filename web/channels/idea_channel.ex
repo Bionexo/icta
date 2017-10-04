@@ -111,9 +111,10 @@ defmodule Icta.IdeaChannel do
   end
 
   def handle_in("edit", params, socket) do
+    current_user = socket.assigns[:current_user]
     idea = Repo.one(from idea in Idea,
-                    where: (idea.id == ^params["idea_id"]) and (idea.user_id == ^socket.assigns[:current_user].id or
-                            idea.owner_id == ^socket.assigns[:current_user].id))
+                    where: (idea.id == ^params["idea_id"]) and (idea.user_id == ^current_user.id or
+                            idea.owner_id == ^current_user.id or ^current_user.kind == "admin"))
     idea = Idea.changeset(idea, params["attributes"])
     case Repo.update(idea) do
       {:ok, _} ->

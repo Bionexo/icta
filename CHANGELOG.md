@@ -1,5 +1,9 @@
 # Next Version
 
+# 3.2.1
+
+- Allow admins to edit any idea
+
 # 3.2.0
 
 - Order comments by date
