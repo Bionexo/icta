@@ -1,5 +1,10 @@
 # Next Version
 
+# 3.2.0
+
+- Order comments by date
+- Use node 8.5.0
+
 # 3.1.1
 
 - Keep only the new office category
