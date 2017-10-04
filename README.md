@@ -15,7 +15,7 @@ This is also a sample application of how you can run a stack using:
 ### Dependencies
 
  * Elixir 1.4.2
- * Node 7.3.0
+ * Node 8.5.0
  * npm 3.10.10
  * Postgres 9.6.1
 

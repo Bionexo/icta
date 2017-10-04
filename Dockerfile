@@ -1,6 +1,6 @@
 FROM elixir:1.4
 
-RUN curl https://nodejs.org/download/release/v7.3.0/node-v7.3.0-linux-x64.tar.gz | tar -xz -C /usr/local --strip-components=1
+RUN curl https://nodejs.org/download/release/v8.5.0/node-v8.5.0-linux-x64.tar.gz | tar -xz -C /usr/local --strip-components=1
 
 ENV MIX_ENV prod
 

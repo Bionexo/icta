@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An idea collaborative management app",
   "main": "index.js",
+  "repository": "https://github.com/Bionexo/icta",
   "directories": {
     "test": "test"
   },
@@ -44,7 +45,6 @@
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "chalk": "^2.1.0",
-    "css-loader": "^0.28.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-import-resolver-webpack": "^0.8.3",
