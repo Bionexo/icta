@@ -56,6 +56,12 @@
     "gulp-eslint": "^4.0.0",
     "gulp-watch": "^4.3.11",
     "gutil": "^1.6.4",
-    "url-loader": "^0.5.8"
+    "url-loader": "^0.5.8",
+    "foreman": "^1.4.1"
+  },
+  "scripts": {
+    "setup": "npm install && mix deps.get && mix ecto.create && mix ecto.migrate",
+    "test": "mix test && sass-lint -vq",
+    "start": "nf start -j Procfile.dev"
   }
 }
