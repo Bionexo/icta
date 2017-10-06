@@ -1,0 +1,2 @@
+server: mix phoenix.server
+client: webpack --watch --color
